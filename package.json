@@ -1,0 +1,14 @@
+{
+  "name": "assignment",
+  "version": "0.0.1",
+  "author": "Giwon Lim",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "concurrently": "^9.1.2"
+  },
+  "scripts": {
+    "dev": "node run-dev.js"
+  },
+  "workspaces": ["gateway-server", "auth-server", "event-server"]
+}
