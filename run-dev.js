@@ -1,7 +1,7 @@
 const concurrently = require('concurrently');
 
 concurrently([
-  { command: 'npm run start:dev --workspace=gateway-server', name: 'gateway' },
-  { command: 'npm run start:dev --workspace=auth-server', name: 'auth' },
-  { command: 'npm run start:dev --workspace=event-server', name: 'event' },
+  { command: 'cd gateway-server && npm run start:dev', name: 'gateway' },
+  { command: 'cd auth-server && npm run start:dev', name: 'auth' },
+  { command: 'cd event-server && npm run start:dev', name: 'event' },
 ]);

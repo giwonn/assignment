@@ -1,8 +1,9 @@
 services:
+  # Gateway 서버
   gateway-server:
     image: gateway-server
     build:
-      context: ./gateway-server
+      context: gateway-server
       dockerfile: Dockerfile
     environment:
       - AUTH_SERVICE_URL=http://auth-server:3000
@@ -12,25 +13,55 @@ services:
     networks:
       - app-networks
 
+  # Auth 서버
   auth-server:
     image: auth-server
     build:
-      context: ./auth-server
+      context: auth-server
       dockerfile: Dockerfile
     environment:
       - PORT=3000
+      - MONGODB_URI=mongodb://mongo-auth:27017/auth
     networks:
       - app-networks
 
+  mongo-auth:
+    image: mongo
+    container_name: mongo-auth
+    ports:
+      - '27017:27017'
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: authpass
+    volumes:
+      - mongo-auth-data:/data/db
+
+  # Event 서버
   event-server:
     image: event-server
     build:
-      context: ./event-server
+      context: event-server
       dockerfile: Dockerfile
     environment:
       - PORT=3000
+      - MONGODB_URI=mongodb://mongo-event:27017/event
     networks:
       - app-networks
 
+  mongo-event:
+    image: mongo
+    container_name: mongo-event
+    ports:
+      - '27018:27017'
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: eventpass
+    volumes:
+      - mongo-event-data:/data/db
+
 networks:
   app-networks:
+
+volumes:
+  mongo-auth-data:
+  mongo-user-data:

@@ -8,7 +8,7 @@
     "concurrently": "^9.1.2"
   },
   "scripts": {
+    "install": "node run-install.js",
     "dev": "node run-dev.js"
-  },
-  "workspaces": ["gateway-server", "auth-server", "event-server"]
+  }
 }
