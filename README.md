@@ -4,7 +4,7 @@
 
 ### 개발 환경 실행
 ```
-1. docker compose -f docker-compose.infra.yml up -d
+1. docker compose -f docker-compose.dev.yml up -d
 2. npm install
 3. npm run dev
 ```
