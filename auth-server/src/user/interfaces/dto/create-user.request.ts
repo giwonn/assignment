@@ -4,10 +4,10 @@ import {
   IsEmail,
   IsEnum,
   IsNotEmpty,
-  MinLength,
 } from 'class-validator';
 import { UserRole } from '@/shared/enums/user-role.enum';
 import { CreateUserDto } from '@/user/application/dto/create-user.dto';
+import { IsPassword } from '@/shared/decorators/is-password.decorator';
 
 export class CreateUserRequest {
   @IsEmail()
@@ -16,7 +16,7 @@ export class CreateUserRequest {
   @IsNotEmpty()
   name: string;
 
-  @MinLength(12)
+  @IsPassword()
   password: string;
 
   @IsArray()

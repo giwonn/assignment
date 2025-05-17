@@ -18,5 +18,6 @@ import { UserRepository } from '@/user/domain/user.repository';
       useClass: UserMongooseRepository,
     },
   ],
+  exports: [UserRepository],
 })
 export class UserModule {}

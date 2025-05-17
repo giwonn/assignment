@@ -7,8 +7,8 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: authpass
-    volumes:
-      - mongo-auth-data:/data/db
+#    volumes:
+#      - mongo-auth-data:/data/db
 
   mongo-event:
     image: mongo
@@ -18,9 +18,9 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: eventpass
-    volumes:
-      - mongo-event-data:/data/db
+#    volumes:
+#      - mongo-event-data:/data/db
 
-volumes:
-  mongo-auth-data:
-  mongo-event-data:
+#volumes:
+#  mongo-auth-data:
+#  mongo-event-data:
