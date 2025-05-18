@@ -5,6 +5,7 @@ import { HttpModule } from '@nestjs/axios';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import localEnvConfig from '@/config/local-env.config';
+import { IgnoreStaticRequestMiddleware } from '@/shared/middleware/ignore-static-request.middleware';
 import { LoggerModule } from '@/shared/logger/logger.module';
 import { GuardModule } from '@/shared/guard/guard.module';
 
@@ -30,4 +31,8 @@ import { GuardModule } from '@/shared/guard/guard.module';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(IgnoreStaticRequestMiddleware).forRoutes('*');
+  }
+}
