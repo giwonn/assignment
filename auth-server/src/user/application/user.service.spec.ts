@@ -17,6 +17,7 @@ describe('UserService', () => {
     };
     hashLib = {
       hash: jest.fn(),
+      compare: jest.fn(),
     };
 
     userService = new UserService(userRepository, hashLib);
