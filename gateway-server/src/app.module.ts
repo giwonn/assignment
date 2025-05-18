@@ -1,10 +1,11 @@
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { HttpModule } from '@nestjs/axios';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import localEnvConfig from '@/config/local-env.config';
+import { ProxyController } from '@/proxy.controller';
+import { ProxyService } from '@/proxy.service';
+import { RouteService } from '@/route.service';
 import { IgnoreStaticRequestMiddleware } from '@/shared/middleware/ignore-static-request.middleware';
 import { LoggerModule } from '@/shared/logger/logger.module';
 import { GuardModule } from '@/shared/guard/guard.module';
@@ -28,8 +29,8 @@ import { GuardModule } from '@/shared/guard/guard.module';
     LoggerModule,
     GuardModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [ProxyController],
+  providers: [ProxyService, RouteService],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
