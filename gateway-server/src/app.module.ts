@@ -1,10 +1,11 @@
-import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { HttpModule } from '@nestjs/axios';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import localEnvConfig from '@/config/local-env.config';
+import { LoggerModule } from '@/shared/logger/logger.module';
 import { GuardModule } from '@/shared/guard/guard.module';
 
 @Module({
@@ -23,6 +24,7 @@ import { GuardModule } from '@/shared/guard/guard.module';
           .replace(/\\n/g, '\n'),
       }),
     }),
+    LoggerModule,
     GuardModule,
   ],
   controllers: [AppController],

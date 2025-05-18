@@ -8,7 +8,7 @@ services:
     environment:
       - AUTH_SERVICE_URL=http://auth-server:3000
       - EVENT_SERVICE_URL=http://event-server:3000
-      - JWT_PUBLIC_KEY=jwt-public-key
+      - JWT_SECRET_KEY=jwt-secret-key
     ports:
       - '3000:3000'
     networks:
@@ -23,8 +23,7 @@ services:
     environment:
       - PORT=3000
       - MONGODB_URI=mongodb://mongo-auth:27017/auth
-      - JWT_PUBLIC_KEY=jwt-public-key
-      - JWT_PRIVATE_KEY=jwt-private-key
+      - JWT_SECRET_KEY=jwt-secret-key
     networks:
       - app-networks
 
@@ -67,4 +66,4 @@ networks:
 
 volumes:
   mongo-auth-data:
-  mongo-user-data:
+  mongo-event-data:
