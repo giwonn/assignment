@@ -11,11 +11,11 @@ export class CreateUserDto {
   roles: UserRole[];
 
   public toEntity(hashedPassword: string): User {
-    const user = new User();
-    user.email = this.email;
-    user.name = this.name;
-    user.hashedPassword = hashedPassword;
-    user.roles = this.roles;
-    return user;
+    return User.create({
+      email: this.email,
+      name: this.name,
+      hashedPassword,
+      roles: this.roles,
+    });
   }
 }

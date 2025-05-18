@@ -11,10 +11,12 @@ export class UserMongooseRepository extends UserRepository {
   }
 
   async findByEmail(email: string): Promise<User | null> {
-    return await this.userModel.findOne({ email }).exec();
+    const doc = await this.userModel.findOne({ email }).exec();
+    return doc ? User.from(doc) : null;
   }
 
   async create(user: User): Promise<User> {
-    return this.userModel.create(user);
+    const doc = await this.userModel.create(user);
+    return User.from(doc);
   }
 }

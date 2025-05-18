@@ -38,6 +38,16 @@ export class User {
 
     return user;
   }
+
+  public static create(params: Omit<User, 'id'>): User {
+    const user = new User();
+    user.email = params.email;
+    user.name = params.name;
+    user.hashedPassword = params.hashedPassword;
+    user.roles = params.roles;
+
+    return user;
+  }
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
