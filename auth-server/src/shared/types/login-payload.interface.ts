@@ -4,7 +4,7 @@ interface JwtPayload {
 }
 
 export interface UserPayload {
-  email: string;
+  sub: string;
   roles: string[];
 }
 

@@ -6,6 +6,12 @@ export type UserDocument = HydratedDocument<User>;
 
 @Schema({ timestamps: true })
 export class User {
+  protected _id: string;
+  get id(): string {
+    if (!this._id) throw new Error('id not set');
+    return this._id;
+  }
+
   @Prop({ required: true, unique: true })
   email: string;
 
@@ -21,6 +27,17 @@ export class User {
     type: [String],
   })
   roles: UserRole[];
+
+  public static from(document: UserDocument): User {
+    const user = new User();
+    user._id = document._id.toString();
+    user.email = document.email;
+    user.name = document.name;
+    user.hashedPassword = document.hashedPassword;
+    user.roles = document.roles;
+
+    return user;
+  }
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

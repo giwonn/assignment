@@ -21,7 +21,7 @@ export class ProxyService {
       'content-Type': req.headers['content-type'],
     };
     if (user) {
-      headers['x-user-email'] = user.email;
+      headers['x-user-id'] = user.sub;
     }
 
     const response = this.httpService.request({

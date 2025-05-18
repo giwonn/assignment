@@ -29,7 +29,7 @@ export class AuthService {
 
     // 3. 이메일, 비밀번호 둘 다 검증되면 JWT 토큰을 발급한다.
     const payload: UserPayload = {
-      email: user.email,
+      sub: user.id,
       roles: user.roles,
     };
 

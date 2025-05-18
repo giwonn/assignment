@@ -1,4 +1,4 @@
 export interface CurrentUserPayload {
-  email: string;
+  sub: string;
   roles: string[];
 }
