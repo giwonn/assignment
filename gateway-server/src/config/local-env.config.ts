@@ -2,10 +2,9 @@ const jwtConfig = {
   JWT_SECRET_KEY: 'jwt-secret-key',
 };
 
-const MongoConfig = {
-  MONGODB_URI: 'mongodb://localhost:27017',
-  MONGO_INITDB_ROOT_USERNAME: 'root',
-  MONGO_INITDB_ROOT_PASSWORD: 'authpass',
+const serverConfig = {
+  AUTH_SERVICE_URL: 'http://localhost:3001',
+  EVENT_SERVICE_URL: 'http://localhost:3002',
 };
 
 export default () => {
@@ -13,6 +12,6 @@ export default () => {
 
   return {
     ...jwtConfig,
-    ...MongoConfig,
+    ...serverConfig,
   };
 };

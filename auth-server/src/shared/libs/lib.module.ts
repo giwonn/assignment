@@ -14,15 +14,7 @@ const providers: Provider[] = [HashLib, JwtLib];
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (config: ConfigService) => ({
-        privateKey: config
-          .getOrThrow<string>('JWT_PRIVATE_KEY')
-          .replace(/\\n/g, '\n'),
-        publicKey: config
-          .getOrThrow<string>('JWT_PUBLIC_KEY')
-          .replace(/\\n/g, '\n'),
-        signOptions: {
-          algorithm: 'RS256',
-        },
+        secret: config.get<string>('JWT_SECRET_KEY'),
       }),
     }),
   ],
