@@ -15,7 +15,7 @@ export class ProxyService {
   async proxy(req: Request, user: CurrentUserPayload | undefined) {
     const prefix = req.path.split('/')[1];
     const baseUrl = this.routeService.getUrl(prefix);
-    const targetUrl = `${baseUrl}${req.originalUrl}`;
+    const targetUrl = `${baseUrl}${req.path}`;
 
     const headers = {
       'content-Type': req.headers['content-type'],

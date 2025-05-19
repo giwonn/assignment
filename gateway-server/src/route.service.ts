@@ -10,6 +10,7 @@ export class RouteService {
       auth: this.configService.getOrThrow<string>('AUTH_SERVICE_URL'),
       users: this.configService.getOrThrow<string>('AUTH_SERVICE_URL'),
       events: this.configService.getOrThrow<string>('EVENT_SERVICE_URL'),
+      rewards: this.configService.getOrThrow<string>('EVENT_SERVICE_URL'),
     };
   }
 

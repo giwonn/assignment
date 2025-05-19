@@ -5,4 +5,7 @@ export abstract class RewardClaimHistoryRepository {
     rewardClaimHistory: RewardClaimHistory,
   ): Promise<RewardClaimHistory>;
 
+  abstract findClaimHistories(
+    conditions: Partial<RewardClaimHistory>,
+  ): Promise<RewardClaimHistory[]>;
 }

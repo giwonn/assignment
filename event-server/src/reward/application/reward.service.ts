@@ -6,7 +6,9 @@ import {
   RewardAlreadyExistsException,
   RewardNotFoundException,
 } from '@/reward/reward.exception';
+import { FindClaimHistoryDto } from '@/reward/application/dto/find-claim-history.dto';
 import { RewardClaimHistoryRepository } from '@/reward/domain/reward-claim-history.repository';
+import { ClaimHistoryResult } from '@/reward/application/dto/claim-history.result';
 import {
   RewardAlreadyClaimedExistsException,
   UserEventProgressIsNotCompletedException,
@@ -87,5 +89,15 @@ export class RewardService {
     if (reward == null) throw new RewardNotFoundException();
 
     return ClaimRewardResult.from(reward);
+  }
+
+  async findClaimHistories(dto: FindClaimHistoryDto) {
+    const conditions = JSON.parse(JSON.stringify(dto)) as FindClaimHistoryDto;
+    const claimHistories =
+      await this.rewardClaimHistoryRepository.findClaimHistories(conditions);
+
+    return claimHistories.map((claimHistory) =>
+      ClaimHistoryResult.from(claimHistory),
+    );
   }
 }

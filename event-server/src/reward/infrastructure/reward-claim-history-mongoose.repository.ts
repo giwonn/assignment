@@ -23,4 +23,10 @@ export class RewardClaimHistoryMongooseRepository
 
     return docs.map((doc) => RewardClaimHistory.from(doc));
   }
+
+  async create(
+    rewardClaimHistory: RewardClaimHistory,
+  ): Promise<RewardClaimHistory> {
+    return await this.rewardClaimHistory.create(rewardClaimHistory);
+  }
 }
