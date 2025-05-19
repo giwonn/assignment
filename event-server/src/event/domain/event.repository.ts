@@ -7,5 +7,7 @@ export abstract class EventRepository {
     pageSize: number,
   ): Promise<{ events: Event[]; total: number }>;
 
+  abstract findById(eventId: string): Promise<Event | null>;
+
   abstract create(event: Event): Promise<Event>;
 }

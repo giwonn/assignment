@@ -37,6 +37,12 @@ export class EventMongooseRepository implements EventRepository {
     };
   }
 
+  async findById(eventId: string): Promise<Event | null> {
+    const doc = await this.eventModel.findById(eventId).exec();
+    if (!doc) return null;
+    return Event.from(doc);
+  }
+
   async create(event: Event): Promise<Event> {
     const doc: EventDocument = await this.eventModel.create(event);
     return Event.from(doc);
