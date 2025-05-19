@@ -10,6 +10,14 @@ export class RewardMongooseRepository implements RewardRepository {
     @InjectModel(Reward.name) private readonly rewardModel: Model<Reward>,
   ) {}
 
+  async findByEventId(eventId: string): Promise<Reward | null> {
+    const doc = await this.rewardModel
+      .findOne({ event: new Types.ObjectId(eventId) })
+      .exec();
+    if (!doc) return null;
+    return Reward.from(doc);
+  }
+
   async create(reward: Reward): Promise<Reward> {
     return await this.rewardModel.create(reward);
   }
