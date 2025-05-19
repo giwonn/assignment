@@ -20,3 +20,74 @@ Content-Type: application/json
 }
 
 > {% client.global.set("accessToken", response.body.accessToken) %}
+
+
+### 이벤트 등록
+POST http://localhost:3000/events
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+    "title": "test event",
+    "type": "LOGIN",
+    "details": {},
+    "from": "2025-05-15T00:00:00Z",
+    "to": "2025-05-30T00:00:00Z"
+}
+
+> {% client.global.set("eventId", response.body.id) %}
+
+
+### 이벤트 조회
+GET http://localhost:3000/events?from=2025-05-01&to=2025-06-01&page=1&pageSize=10
+Authorization: Bearer {{accessToken}}
+
+
+### 보상 등록
+POST http://localhost:3000/rewards
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+  "eventId": "{{eventId}}",
+  "type": "POINT",
+  "targetId": "point-1",
+  "quantity": 200
+}
+
+
+### 보상 조회
+GET http://localhost:3000/rewards?eventId={{eventId}}
+Authorization: Bearer {{accessToken}}
+
+
+### 유저 이벤트 진행도 등록
+POST http://localhost:3000/events/progress
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+    "eventId": "{{eventId}}",
+    "maxCount": 0
+}
+
+
+### 유저 보상 요청
+POST http://localhost:3000/rewards/claims
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+  "eventId": "{{eventId}}"
+}
+
+
+### 유저 보상 요청 이력 조회
+GET http://localhost:3000/rewards/claim-histories/me
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+  "eventId": "{{eventId}}"
+}
+
