@@ -6,6 +6,7 @@ services:
       context: gateway-server
       dockerfile: Dockerfile
     environment:
+      - PORT=3000
       - AUTH_SERVICE_URL=http://auth-server:3000
       - EVENT_SERVICE_URL=http://event-server:3000
       - JWT_SECRET_KEY=jwt-secret-key
@@ -21,9 +22,11 @@ services:
       context: auth-server
       dockerfile: Dockerfile
     environment:
-      - PORT=3000
-      - MONGODB_URI=mongodb://mongo-auth:27017/auth
-      - JWT_SECRET_KEY=jwt-secret-key
+      PORT: 3000
+      MONGODB_URI: mongodb://mongo-auth:27017
+      JWT_SECRET_KEY: jwt-secret-key
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: authpass
     networks:
       - app-networks
 
@@ -35,8 +38,8 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: authpass
-    volumes:
-      - mongo-auth-data:/data/db
+    networks:
+      - app-networks
 
   # Event 서버
   event-server:
@@ -45,8 +48,10 @@ services:
       context: event-server
       dockerfile: Dockerfile
     environment:
-      - PORT=3000
-      - MONGODB_URI=mongodb://mongo-event:27017/event
+      PORT: 3000
+      MONGODB_URI: mongodb://mongo-event:27017
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: eventpass
     networks:
       - app-networks
 
@@ -58,12 +63,8 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: eventpass
-    volumes:
-      - mongo-event-data:/data/db
+    networks:
+      - app-networks
 
 networks:
   app-networks:
-
-volumes:
-  mongo-auth-data:
-  mongo-event-data:

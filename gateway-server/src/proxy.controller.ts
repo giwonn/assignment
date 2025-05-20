@@ -33,7 +33,7 @@ export class ProxyController {
 
       res.status(response.status).set(headers).send(response.data);
     } catch (error) {
-      console.error('Proxy error:', error.messages);
+      console.error('Proxy error:', error);
       throw new InternalServerErrorException();
     }
   }
