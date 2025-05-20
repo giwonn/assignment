@@ -46,3 +46,9 @@
 
 ### API 구조
 ![architecture](./architecture.png)
+
+
+### 고민사항
+- jwt는 과제 단순화를 위해 HS256(대칭키)를 사용하였습니다. 실제 서비스에서는 RS256(비대칭키)를 이용해서 auth-server에서는 private key를 가지고있고, gateway에서만 public key로 jwt를 검증하는 방법이 좋을것 같습니다.
+- local `.env`를 추가하지 않기 위해서 local-env.config.ts를 작성하였습니다.
+- 다형성을 보장할 일이 아직은 없다고 판단하여 respository.ts는 interface 대신 추상클래스로 DI를 진행하였습니다.
